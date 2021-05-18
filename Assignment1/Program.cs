@@ -40,7 +40,7 @@ namespace Assignment1
                 "target is 9");
             Console.WriteLine(outputarray[0].ToString() + (",") + outputarray[1].ToString());
 
-            //QUESTION 1//
+            //QUESTION 2//
 
             //string StringReverse(string s) need to figure out why this method title line gives errors when I have it here.
             {
