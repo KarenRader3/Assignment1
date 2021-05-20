@@ -1,5 +1,6 @@
 ﻿using System;
-
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Assignment1
 {
@@ -20,116 +21,162 @@ namespace Assignment1
                 //if all the index points are greater than the target it will return
                 //the output we set above.  Otherwise it will search and return the index
                 //point of the first and last point of the target
-                while (marks[index] < target)
+                while ((index < marks.Length) && (marks[index] < target))
                     index++;
-                if (marks[index] > target)
+                if ((index >= marks.Length) || (marks[index] > target))
                     return output;
                 output[0] = index;
-                while (marks[index] == target)
+                while ((index < marks.Length) && (marks[index] == target))
                     index++;
                 output[1] = index - 1;
                 return output;
-
             }
             //This is to test and show the output of the method working.
             Console.WriteLine("Question 1 Output:");
-            
+            Console.WriteLine("=======================");
+
             int[] testarray = { 5, 6, 6, 9, 9, 12 };
-            int[] outputarray = targetRange(testarray, 9);
-            Console.WriteLine("Test array marks are [5, 6, 6, 9, 9, 12] and the test " +
+            int[] outputarray = targetRange(testarray, 12);
+            int[] outputarray2 = targetRange(testarray, 10);
+
+            Console.WriteLine("Test first array marks are [5, 6, 6, 9, 9, 12] and the test " +
                 "target is 9");
             Console.WriteLine(outputarray[0].ToString() + (",") + outputarray[1].ToString());
+            Console.WriteLine("The second test array marks are [5, 6, 6, 9, 9, 12] and the test" +
+                "target is 10");
+            Console.WriteLine(outputarray2[0].ToString() + (",") + outputarray2[1].ToString());
+
 
             //QUESTION 2//
 
-            //string StringReverse(string s) need to figure out why this method title line gives errors when I have it here.
+            string StringReverse(string s)
             {
-                string sentense = "University of South Florida";
-                char[] arr = sentense.ToCharArray();
-                int temp = 0;
+                //concert the input string of the function to a char array and create a new empty char array
+                //the same length as the string input.
+                char[] forward = s.ToCharArray();
+                char[] flipped = new char[forward.Length];
+                Stack<char> word = new Stack<char>();
 
-                for (int i = 0; i <= arr.Length - 1; i++)
+                //created a stack and ran a for loop to put the characters onto the stack up until a white space is
+                //reached at which point it pops the stack back off putting it into the flipped char array
+                int index = 0;
+                for (int i = 0; i < forward.Length; i++)
                 {
-                    int count = temp;
-                    int num1 = 1;
-
-                    if (arr[i] == ' ' || i == arr.Length - 1)
+                    if (forward[i] != ' ')
+                        word.Push(forward[i]);
+                    else
                     {
-                        if (i == arr.Length - 1)
+                        while (word.Count > 0)
                         {
-                            for (int c = i; c >= temp; c--)
-                            {
-                                
-                                if (num1 <= (i - temp) / 2)
-                                {
-                                    char tempC = arr[count];
-                                    arr[count] = arr[c];
-                                    arr[c] = tempC;
-                                    count++;
-                                    num1++;
-                                }
-                            }
+                            flipped[index] = word.Pop();
+                            index++;
                         }
-                        else
-                        {
-                            for (int c = i - 1; c >= temp; c--)
-                            {
-                                if (num1 <= (i - temp) / 2)
-                                {
-                                    char tempC = arr[count];
-                                    arr[count] = arr[c];
-                                    arr[c] = tempC;
-                                    count++;
-                                    num1++;
-                                }
-                            }
-                        }
-                        temp = i + 1;
+                        flipped[index] = ' ';
+                        index++;
                     }
                 }
-                string newLine = new string(arr);
-                Console.WriteLine("Question 2 Output:");
-                Console.WriteLine(sentense);
-                Console.WriteLine(newLine);
+                while (word.Count > 0)
+                {
+                    flipped[index] = word.Pop();
+                    index++;
+                }
+                string final = new string(flipped);
+                return final;
             }
+            //these next lines are to test with the sample data provided in the question
+
+            string test = StringReverse("University of South Florida");
+            Console.WriteLine("Question 2 Output:");
+            Console.WriteLine("=======================");
+            Console.WriteLine("The sample string is \"University of South Florida\".");
+            Console.WriteLine(test);
+
+
 
             //QUESTION 3//
 
-            static int minSum(int[] arr, int n)
+            int minSum(int[] arr)
             {
                 int sum = arr[0];
+                int maxindex = arr.Length - 1;
 
                 //create a loop to go through the array and if an array index is equal to the
-                //index before it replaces it with j which is the array index value +1
-                for (int i = 1; i < n; i++)
+                //index before it replaces it with j which is the array index value +1 and then add the array to sum
+                //which was set at index 0. continue through loop until reach maxindex which is the array length.
+
+                for (int i = 1; i <= maxindex; i++)
                 {
                     if (arr[i] == arr[i - 1])
-                    {
-                        int j = i;
-                        while (j < n && arr[j] <= arr[j - 1])
-                        {
-                            arr[j] = arr[j] + 1;
-                            j++;
-                        }
-                    }
+                        arr[i] = arr[i] + 1;
                     sum = sum + arr[i];
                 }
-                //once you run through the whole array have it return the sum of the array
                 return sum;
             }
-           
-           // Public static void Main()  **again need to figure out why the method title gives me an error when I place it there.
+            //These next lines are to test the method using the samples provided in the question.
+            Console.WriteLine("Question 3 Output:");
+            Console.WriteLine("=======================");
+
+            int[] input1 = { 2, 2, 3, 5, 6 };
+            Console.WriteLine(minSum(input1));
+            int[] input2 = { 40, 40 };
+            Console.WriteLine(minSum(input2));
+            int[] input3 = { 4, 5, 6, 9 };
+            Console.WriteLine(minSum(input3));
+
+
+
+            //QUESTION 4//
+            static string FreqSort(string s)
             {
-                //This is a test of the example provided.
-                Console.WriteLine("Question 3 Output:");
-                int[] arr = { 2, 2, 3, 5, 6 };
-                int n = arr.Length;
-                Console.WriteLine("[2, 2, 3, 5, 6]");
-                Console.WriteLine(minSum(arr, n));
-            }
+                //convert the string input from the function call into a char array and create an empty dictionary with key as a char
+                //and value as an int 
+                char[] input = s.ToCharArray();
+                Dictionary<char, int> dict = new Dictionary<char, int>();
+
+
+                int maxindex = input.Length - 1;
+                for (int i = 0; i <= maxindex; i++)
+                {
+                    //check if key is in dictionary already and if so increment the
+                    //value by 1 and if not add key to dictionary with value 1
+                    if (dict.ContainsKey(input[i]))
+                        dict[input[i]] = dict[input[i]] + 1;
+                    else dict.Add(input[i], 1);
+                }
+
+                // sort the keys by frequency and assign them into the char array output in descending order
+                // repeating for the total number of the value assigned for each key
+
+                char[] output = new char[input.Length];
+                int index = 0;
+                foreach (KeyValuePair<char, int> letter in dict.OrderByDescending(key => key.Value))
+
+                {
+                    int count = letter.Value;
+                    for (int i=1; i<=count; i++)
+                    {
+                        output[index] = letter.Key;
+                        index++;
+                    }
+
+                }
+                string final = new string(output);
+                return final;
+
+                
+                    
+                }
+            //these next lines are to test the method using the samples provided in the question
+            Console.WriteLine("Question 4 Output:");
+            Console.WriteLine("=======================");
+
+            Console.WriteLine(FreqSort("Dell"));
+            Console.WriteLine(FreqSort("eebhhh"));
+            Console.WriteLine(FreqSort("yYkk"));
+        }
         }
     }
-}
+
 
 
 
