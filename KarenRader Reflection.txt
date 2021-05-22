@@ -1,0 +1,14 @@
+Karen Rader- Self Reflection
+Assignment 1
+
+I found this assignment challenging but in the best way. I am completely new to programming
+the only experience I have is the coursera Python 1 course I took last summer. In order to
+more easily complete this assignmnet I think spending time in the first class actually 
+covering some of the methods and functions we would need to call upon would have helped. I 
+was able to disect the logic and put together what I needed to do but with absolutely no
+c# or formal programming experience figuring out what functions I needed to call upon to get
+the methods to work was very difficult.  I spent a majority of the time using trial and error 
+to figure out what I could do and couldn't do.  In the end though I had fun with the assignment
+and enjoyed the troubleshooting to get this program to run. All in all I spent roughly 7 hours 
+on my own working the problems and as a group we met for about 2.5 hours putting everything
+together and talking through it.
