@@ -1,0 +1,9 @@
+Dominick Russo- Self Reflection
+Assignment 1
+
+
+"I spent around 12 hrs working on various parts of this assignment and had trouble with 
+variable types and getting the appropriate returns from my methods. I found it easier to 
+code things outside of the methods and struggled with getting working functions the way
+ the assignment asked. Luckily, my team mates understood this better than I did and were
+ able to point out where I was going wrong."
