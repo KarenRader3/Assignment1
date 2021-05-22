@@ -31,33 +31,32 @@ namespace Assignment1
                 output[1] = index - 1;
                 return output;
             }
+
             //This is to test and show the output of the method working.
             Console.WriteLine("Question 1 Output:");
             Console.WriteLine("=======================");
 
             int[] testarray = { 5, 6, 6, 9, 9, 12 };
-            int[] outputarray = targetRange(testarray, 12);
+            int[] outputarray = targetRange(testarray, 9);
             int[] outputarray2 = targetRange(testarray, 10);
 
-            Console.WriteLine("Test first array marks are [5, 6, 6, 9, 9, 12] and the test " +
-                "target is 9");
-            Console.WriteLine(outputarray[0].ToString() + (",") + outputarray[1].ToString());
-            Console.WriteLine("The second test array marks are [5, 6, 6, 9, 9, 12] and the test" +
-                "target is 10");
-            Console.WriteLine(outputarray2[0].ToString() + (",") + outputarray2[1].ToString());
+            Console.WriteLine("The example test array marks are [5, 6, 6, 9, 9, 12]");
+            Console.WriteLine("Target 9::  " + outputarray[0].ToString() + (",") + outputarray[1].ToString());
+            Console.WriteLine("Target 10::  " + outputarray2[0].ToString() + (",") + outputarray2[1].ToString());
+            Console.WriteLine(" ");
 
 
             //QUESTION 2//
 
             string StringReverse(string s)
             {
-                //concert the input string of the function to a char array and create a new empty char array
+                //convert the input string of the function to a char array and create a new empty char array
                 //the same length as the string input.
                 char[] forward = s.ToCharArray();
                 char[] flipped = new char[forward.Length];
                 Stack<char> word = new Stack<char>();
 
-                //created a stack and ran a for loop to put the characters onto the stack up until a white space is
+                //create a stack and run a for loop to put the characters onto the stack up until a white space is
                 //reached at which point it pops the stack back off putting it into the flipped char array
                 int index = 0;
                 for (int i = 0; i < forward.Length; i++)
@@ -89,7 +88,8 @@ namespace Assignment1
             Console.WriteLine("Question 2 Output:");
             Console.WriteLine("=======================");
             Console.WriteLine("The sample string is \"University of South Florida\".");
-            Console.WriteLine(test);
+            Console.WriteLine("Result: " + test);
+            Console.WriteLine(" ");
 
 
 
@@ -100,9 +100,9 @@ namespace Assignment1
                 int sum = arr[0];
                 int maxindex = arr.Length - 1;
 
-                //create a loop to go through the array and if an array index is equal to the
-                //index before it replaces it with j which is the array index value +1 and then add the array to sum
-                //which was set at index 0. continue through loop until reach maxindex which is the array length.
+                //look through the array and if the index is equal to the index before it indrease the value by 1
+                //then add the sum of the array
+
 
                 for (int i = 1; i <= maxindex; i++)
                 {
@@ -116,12 +116,16 @@ namespace Assignment1
             Console.WriteLine("Question 3 Output:");
             Console.WriteLine("=======================");
 
+            Console.WriteLine("The first example test array is {2,2,3,5,6}");
             int[] input1 = { 2, 2, 3, 5, 6 };
-            Console.WriteLine(minSum(input1));
+            Console.WriteLine("Result: " + minSum(input1));
+            Console.WriteLine("The second example test array is {40,40}");
             int[] input2 = { 40, 40 };
-            Console.WriteLine(minSum(input2));
+            Console.WriteLine("Result: " + minSum(input2));
+            Console.WriteLine("The third example test array is {4,5,6,9}");
             int[] input3 = { 4, 5, 6, 9 };
-            Console.WriteLine(minSum(input3));
+            Console.WriteLine("Result: " + minSum(input3));
+            Console.WriteLine(" ");
 
 
 
@@ -153,29 +157,156 @@ namespace Assignment1
 
                 {
                     int count = letter.Value;
-                    for (int i=1; i<=count; i++)
+                    for (int i = 1; i <= count; i++)
                     {
                         output[index] = letter.Key;
                         index++;
                     }
-
                 }
                 string final = new string(output);
                 return final;
 
-                
-                    
-                }
+            }
             //these next lines are to test the method using the samples provided in the question
             Console.WriteLine("Question 4 Output:");
             Console.WriteLine("=======================");
 
-            Console.WriteLine(FreqSort("Dell"));
-            Console.WriteLine(FreqSort("eebhhh"));
-            Console.WriteLine(FreqSort("yYkk"));
-        }
+            Console.WriteLine("The first example test string is \"Dell\"");
+            Console.WriteLine("Result: " + FreqSort("Dell"));
+            Console.WriteLine("The first example test string is \"eebhhh\"");
+            Console.WriteLine("Result: " + FreqSort("eebhhh"));
+            Console.WriteLine("The first example test string is \"yYkk\"");
+            Console.WriteLine("Result: " + FreqSort("yYkk"));
+            Console.WriteLine(" ");
+
+            //QUESTION 5//
+
+            static int[] Intersect1(int[] nums1, int[] nums2)
+            {
+
+                Array.Sort(nums1);
+                Array.Sort(nums2);
+
+                //sorted the array and will create list for our intersect variables search through the array and identify
+                //index values from nums2 that are equal to the index values for nums1 and add them to the list
+
+                int index = 0;
+                List<int> intersect = new List<int>();
+                for (int i = 0; i <= nums1.Length - 1; i++)
+                {
+                    while ((index < nums2.Length) && (nums2[index] < nums1[i]))
+                        index++;
+                    if (nums2[index] == nums1[i])
+                    {
+                        intersect.Add(nums2[index]);
+                        index++;
+                    }
+                }
+                int[] final = intersect.ToArray();
+                return final;
+            }
+            //this code is to run the example sets from the question
+
+            Console.WriteLine("Question 5 Output for sort version:");
+            Console.WriteLine("=======================");
+
+            Console.WriteLine("The first sample test arrays are nums1 = [2,5,5,2], nums2 = [5,5]");
+            int[] numbers1 = { 2, 5, 5, 2 };
+            int[] numbers2 = { 5, 5 };
+            Console.WriteLine("Result: " + string.Join("", Intersect1(numbers1, numbers2)));
+
+            Console.WriteLine("The first sample test arrays are nums1 = [3,6,2], nums2 = [6,3,6,7,3]");
+            int[] numbers3 = { 3, 6, 2 };
+            int[] numbers4 = { 6, 3, 6, 7, 3 };
+            Console.WriteLine("Result: " + string.Join("", Intersect1(numbers3, numbers4)));
+            Console.WriteLine(" ");
+
+            static int[] Intersect2(int[] nums1, int[] nums2)
+            {
+                //turn first array into dictionary 
+                Dictionary<int, int> dict = new Dictionary<int, int>();
+
+                int maxindex = nums1.Length - 1;
+
+                for (int i = 0; i <= maxindex; i++)
+                {
+                    //check if key is in dictionary already and if so increment the
+                    //value by 1 and if not add key to dictionary with value 1
+                    if (dict.ContainsKey(nums1[i]))
+                        dict[nums1[i]] = dict[nums1[i]] + 1;
+                    else dict.Add(nums1[i], 1);
+                }
+                //for loop through second array checking if values are in dictionary
+                List<int> intersect = new List<int>();
+                for (int i = 0; i <= nums2.Length - 1; i++)
+                {
+                    if (dict.ContainsKey(nums2[i]))
+                    {
+                        intersect.Add(nums2[i]);
+                        dict[nums2[i]] = dict[nums2[i]] - 1;
+                        if (dict[nums2[i]] == 0)
+                            dict.Remove(nums2[i]);
+                    }
+                }
+                int[] final = intersect.ToArray();
+                return final;
+            }
+            Console.WriteLine("Question 5 Output for dictionary version:");
+            Console.WriteLine("=======================");
+
+            Console.WriteLine("The first sample test arrays are nums1 = [2,5,5,2], nums2 = [5,5]");
+            Console.WriteLine("Result: " + string.Join("", Intersect2(numbers1, numbers2)));
+            Console.WriteLine("The first sample test arrays are nums1 = [3,6,2], nums2 = [6,3,6,7,3]");
+            Console.WriteLine("Result: " + string.Join("", Intersect2(numbers3, numbers4)));
+            Console.WriteLine(" ");
+
+
+            //QUESTION 6//
+
+            bool ContainsDuplicate(char[] arr, int k)
+            {
+                //Create a dictionary adding keys when they char key does not exist: when the key already exist identify if the
+                // the index value I am currently looking at - the value of the key already in the dictionary is less than or equal to 
+                //the integer value- if it is return true if continue through the array return false if the if statement never returns true
+                Dictionary<char, int> dict = new Dictionary<char, int>();
+
+                for (int i = 0; i <= arr.Length - 1; i++)
+                {
+                    if (dict.ContainsKey(arr[i]))
+                    {
+                        if ((i - dict[arr[i]]) <= k)
+                            return true;
+                        dict[arr[i]] = i;
+                    }
+                    else dict.Add(arr[i], i);
+
+                }
+                return false;
+            }
+
+            //This next code is to test the method using the examples provided in the question
+            Console.WriteLine("Question 6 Output:");
+            Console.WriteLine("=======================");
+            char[] test1 = { 'a', 'g', 'h', 'a' };
+            char[] test2 = { 'k', 'y', 'k', 'k' };
+            char[] test3 = { 'a', 'b', 'c', 'a', 'b', 'c' };
+
+            Console.WriteLine("This first test sample is arr=[a,g,h,a], k=3");
+            Console.WriteLine("Result: " + ContainsDuplicate(test1, 3));
+
+            Console.WriteLine("This first test sample is arr=[k,y,k,k], k=1");
+            Console.WriteLine("Result: " + ContainsDuplicate(test1, 3));
+
+            Console.WriteLine("This first test sample is [a,b,c,a,b,c], k=2");
+            Console.WriteLine("Result: " + ContainsDuplicate(test3, 3));
+
+            //    Example 2: arr =[k, y, k, k], k = 1
+
         }
     }
+}
+
+
 
 
 
