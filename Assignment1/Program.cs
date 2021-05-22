@@ -45,7 +45,15 @@ namespace Assignment1
             Console.WriteLine("Target 10::  " + outputarray2[0].ToString() + (",") + outputarray2[1].ToString());
             Console.WriteLine(" ");
 
+            //Additional test to make sure method works on other numbers
+            int[] testarray2 = { 1,2,3,4,4,4,5,6,6,6,7,9,10,17,17 };
+            int[] outputarray3 = targetRange(testarray2, 4);
+            int[] outputarray4 = targetRange(testarray2, 17);
 
+            Console.WriteLine("The example test array marks are [1,2,3,4,4,4,5,6,6,6,7,9,10,17,17]");
+            Console.WriteLine("Target 4::  " + outputarray3[0].ToString() + (",") + outputarray3[1].ToString());
+            Console.WriteLine("Target 17::  " + outputarray4[0].ToString() + (",") + outputarray4[1].ToString());
+            Console.WriteLine(" ");
             //QUESTION 2//
 
             string StringReverse(string s)
@@ -91,24 +99,43 @@ namespace Assignment1
             Console.WriteLine("Result: " + test);
             Console.WriteLine(" ");
 
-
+            //Additional test
+            string testA = StringReverse("C# is fun!");
+            Console.WriteLine("Question 2 Output:");
+            Console.WriteLine("=======================");
+            Console.WriteLine("The sample string is \"C# is fun!\".");
+            Console.WriteLine("Result: " + testA);
+            Console.WriteLine(" ");
 
             //QUESTION 3//
 
             int minSum(int[] arr)
             {
-                int sum = arr[0];
-                int maxindex = arr.Length - 1;
+                Array.Sort(arr);
+                int j = 1;
+                int sum = 0;
+                Dictionary<int, int> numlist = new Dictionary<int, int>();
 
                 //look through the array and if the index is equal to the index before it indrease the value by 1
                 //then add the sum of the array
 
 
-                for (int i = 1; i <= maxindex; i++)
+                for (int i = 0; i < arr.Length; i++)
                 {
-                    if (arr[i] == arr[i - 1])
-                        arr[i] = arr[i] + 1;
-                    sum = sum + arr[i];
+
+                    if (!numlist.ContainsValue(arr[i]))
+                    {
+                        numlist.Add(i, arr[i]);
+                    }
+                    else
+                    {
+                        while (numlist.ContainsValue(arr[i] + j))
+                        {
+                            j++;
+                        }
+                        numlist.Add(i, arr[i] + j);
+                    }
+                    sum = sum + numlist[i];
                 }
                 return sum;
             }
@@ -126,7 +153,12 @@ namespace Assignment1
             int[] input3 = { 4, 5, 6, 9 };
             Console.WriteLine("Result: " + minSum(input3));
             Console.WriteLine(" ");
-
+            
+            //Additional test with multiple duplicates to make sure method still works
+            Console.WriteLine("The fourth example test array is {1,2,2,3,3,3,4,4,4,4,5,5,5,5,5}");
+            int[] input4 = { 1,2,2,3,3,3,4,4,4,4,5,5,5,5,5 };
+            Console.WriteLine("Result: " + minSum(input4));
+            Console.WriteLine(" ");
 
 
             //QUESTION 4//
@@ -179,6 +211,12 @@ namespace Assignment1
             Console.WriteLine("Result: " + FreqSort("yYkk"));
             Console.WriteLine(" ");
 
+            //Additional test to make sure method still works
+            Console.WriteLine("Result: " + FreqSort("Mississippi"));
+            Console.WriteLine(" ");
+
+
+
             //QUESTION 5//
 
             static int[] Intersect1(int[] nums1, int[] nums2)
@@ -221,6 +259,12 @@ namespace Assignment1
             Console.WriteLine("Result: " + string.Join("", Intersect1(numbers3, numbers4)));
             Console.WriteLine(" ");
 
+            Console.WriteLine("The first sample test arrays are nums1 = [3, 4, 5, 6, 6, 7, 8, 9 ], nums2 = [6, 6, 8, 9, 10]");
+            int[] numbers5 = { 3, 4, 5, 6, 6, 7, 8, 9 };
+            int[] numbers6 = { 6, 6, 8, 9, 10};
+            Console.WriteLine("Result: " + string.Join("", Intersect1(numbers5, numbers6)));
+            Console.WriteLine(" ");
+
             static int[] Intersect2(int[] nums1, int[] nums2)
             {
                 //turn first array into dictionary 
@@ -260,6 +304,10 @@ namespace Assignment1
             Console.WriteLine("Result: " + string.Join("", Intersect2(numbers3, numbers4)));
             Console.WriteLine(" ");
 
+            Console.WriteLine("The first sample test arrays are nums1 = [3, 4, 5, 6, 6, 7, 8, 9 ], nums2 = [6, 6, 8, 9, 10]");
+            Console.WriteLine("Result: " + string.Join("", Intersect2(numbers5, numbers6)));
+            Console.WriteLine(" ");
+
 
             //QUESTION 6//
 
@@ -290,15 +338,19 @@ namespace Assignment1
             char[] test1 = { 'a', 'g', 'h', 'a' };
             char[] test2 = { 'k', 'y', 'k', 'k' };
             char[] test3 = { 'a', 'b', 'c', 'a', 'b', 'c' };
+            char[] test4 = { 'a', 'c', 'e', 'c', 'a' };
 
             Console.WriteLine("This first test sample is arr=[a,g,h,a], k=3");
             Console.WriteLine("Result: " + ContainsDuplicate(test1, 3));
 
             Console.WriteLine("This first test sample is arr=[k,y,k,k], k=1");
-            Console.WriteLine("Result: " + ContainsDuplicate(test1, 3));
+            Console.WriteLine("Result: " + ContainsDuplicate(test2, 3));
 
             Console.WriteLine("This first test sample is [a,b,c,a,b,c], k=2");
             Console.WriteLine("Result: " + ContainsDuplicate(test3, 3));
+
+            Console.WriteLine("This first test sample is [a,c, e, c, a], k=4");
+            Console.WriteLine("Result: " + ContainsDuplicate(test3, 4));
 
             //    Example 2: arr =[k, y, k, k], k = 1
 
